@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class HelloAndroidActivity extends Activity {
@@ -31,6 +32,14 @@ public class HelloAndroidActivity extends Activity {
             public void onClick(View v) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Paspaudete mygtuka", Toast.LENGTH_SHORT);
                 toast.show();
+            }
+        });
+        Button button2 = (Button) findViewById(R.id.button2);
+        button2.setText("Pasalink teksta!");
+        button2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                TextView textView = (TextView) findViewById(R.id.txt);
+                textView.setText("");
             }
         });
     }
