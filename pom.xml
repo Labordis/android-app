@@ -13,6 +13,7 @@
 		<platform.version> 4.1.1.4
 			</platform.version>
 		<android.plugin.version>3.6.0</android.plugin.version>
+		<android.sdk.path>C:\Program Files (x86)\Android\android-sdk</android.sdk.path>
 	</properties>
 
 	<dependencies>
