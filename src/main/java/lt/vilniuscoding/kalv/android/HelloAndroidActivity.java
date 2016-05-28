@@ -30,6 +30,8 @@ public class HelloAndroidActivity extends Activity {
 
         final EditText edit = (EditText) findViewById(R.id.editText);
 
+        final TextView txt = (TextView) findViewById(R.id.txt);
+
         Button button1 = (Button) findViewById(R.id.button);
         button1.setText("Paspausk!");
         button1.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +39,7 @@ public class HelloAndroidActivity extends Activity {
                 String ivestasTekstas = "Ivedete teksta: " + edit.getText();
                 Toast toast = Toast.makeText(getApplicationContext(), ivestasTekstas, Toast.LENGTH_SHORT);
                 toast.show();
+                txt.setText(ivestasTekstas);
             }
         });
 
