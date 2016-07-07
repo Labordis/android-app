@@ -1,57 +1,46 @@
 package lt.vilniuscoding.kalv.android;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
+import java.util.List;
 
 public class HelloAndroidActivity extends Activity {
 
-    /**
-     * Called when the activity is first created.
-     * @param savedInstanceState If the activity is being re-initialized after 
-     * previously being shut down then this Bundle contains the data it most 
-     * recently supplied in onSaveInstanceState(Bundle). <b>Note: Otherwise it is null.</b>
-     */
+
+    ListView listView;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (Saugykla.getIrasai() == null) {
+            new Saugykla();
+        }
         initActions();
     }
 
     private void initActions() {
 
-        final EditText edit = (EditText) findViewById(R.id.editText);
+        listView = (ListView) findViewById(R.id.sampleListView);
 
-        final TextView txt = (TextView) findViewById(R.id.txt);
+        List<String> irasai = Saugykla.getIrasai();
 
-        Button button1 = (Button) findViewById(R.id.button);
-        button1.setText("Paspausk!");
-        button1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                String ivestasTekstas = "Ivedete teksta: " + edit.getText();
-                Toast toast = Toast.makeText(getApplicationContext(), ivestasTekstas, Toast.LENGTH_SHORT);
-                toast.show();
-                txt.setText(ivestasTekstas);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1, irasai);
+
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Intent myIntent = new Intent(HelloAndroidActivity.this, Pildymas.class);
+                myIntent.putExtra("itemId", i);
+                HelloAndroidActivity.this.startActivity(myIntent);
             }
         });
-
-
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-	// Inflate the menu; this adds items to the action bar if it is present.
-	getMenuInflater().inflate(lt.vilniuscoding.kalv.android.R.menu.main, menu);
-	return true;
     }
 
 }
